@@ -4,9 +4,15 @@ using System.Collections;
 public class Goal : MonoBehaviour {
 
 	private Transform player;
+	private Transform score;
+	private Transform count;
+
+	private float distance;
 
 	void Awake () {
 		player = GameObject.Find("Player").transform;
+		score = GameObject.Find("Score").transform;
+		count = GameObject.Find("Count").transform;
 	}
 	
 	void Update () {
@@ -16,7 +22,7 @@ public class Goal : MonoBehaviour {
 		Vector3 posA = new Vector3(enemyA.position.x, enemyA.position.y, 10);
 		Vector3 posB = new Vector3(enemyB.position.x, enemyB.position.y, 10);
 
-		float distance = Vector3.Distance(posA, posB);
+		distance = Vector3.Distance(posA, posB);
 
 		transform.localScale = new Vector3(distance, 1, 1);
 
@@ -32,8 +38,10 @@ public class Goal : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.name == "Player") {
-			TextMesh textMesh = player.Find("Count").GetComponent<TextMesh>();
-			textMesh.text = (int.Parse(textMesh.text) + 1).ToString();
+			TextMesh scoreTextMesh = score.GetComponent<TextMesh>();
+			scoreTextMesh.text = (int.Parse(scoreTextMesh.text) + 1000 - (int)distance*4).ToString().PadLeft(8, '0');
+			TextMesh countTextMesh = count.GetComponent<TextMesh>();
+			countTextMesh.text = (int.Parse(countTextMesh.text) + 1).ToString();
 		}
 	}
 }
