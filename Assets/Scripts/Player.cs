@@ -21,13 +21,13 @@ public class Player : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		Vector3 velocity = GetComponent<Rigidbody>().velocity;
+		Vector2 velocity = GetComponent<Rigidbody2D> ().velocity;
 		float magnitude = velocity.magnitude;
 
 		// Apply Dynamic Drag.
-		GetComponent<Rigidbody>().AddForce(velocity.normalized * -magnitude * acceleration/100);
+		GetComponent<Rigidbody2D>().AddForce(velocity.normalized * -magnitude * acceleration/100);
 
-		var direction = Vector3.zero;
+		var direction = Vector2.zero;
 		if (Input.GetKey("w")) 
 			direction.y = 1;
 		if (Input.GetKey("s")) 
@@ -39,10 +39,10 @@ public class Player : MonoBehaviour {
 		direction.Normalize();
 
 		if (magnitude < maxVelocity)
-			GetComponent<Rigidbody>().AddForce(direction * acceleration);
+			GetComponent<Rigidbody2D>().AddForce(direction * acceleration);
 	}
 
-	void OnCollisionEnter(Collision other) {
+	void OnCollisionEnter2D(Collision2D other) {
 		if (other.transform.tag == "Enemy")
 			Time.timeScale = 0.0f;
 	}

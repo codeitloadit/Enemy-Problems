@@ -19,10 +19,10 @@ public class Goal : MonoBehaviour {
 		Transform enemyA = GameObject.Find("EnemyA").transform;
 		Transform enemyB = GameObject.Find("EnemyB").transform;
 
-		Vector3 posA = new Vector3(enemyA.position.x, enemyA.position.y, 10);
-		Vector3 posB = new Vector3(enemyB.position.x, enemyB.position.y, 10);
+		Vector3 posA = new Vector2(enemyA.position.x, enemyA.position.y);
+		Vector3 posB = new Vector2(enemyB.position.x, enemyB.position.y);
 
-		distance = Vector3.Distance(posA, posB);
+		distance = Vector2.Distance(posA, posB);
 
 		transform.localScale = new Vector3(distance, 1, 1);
 
@@ -36,7 +36,7 @@ public class Goal : MonoBehaviour {
 		transform.position = new Vector3(x, y, 0);
 	}
 
-	void OnTriggerEnter (Collider other) {
+	void OnTriggerEnter2D (Collider2D other) {
 		if (other.name == "Player") {
 			TextMesh scoreTextMesh = score.GetComponent<TextMesh>();
 			scoreTextMesh.text = (int.Parse(scoreTextMesh.text) + 1000 - (int)distance*4).ToString().PadLeft(8, '0');

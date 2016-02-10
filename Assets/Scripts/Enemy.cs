@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour {
 		player = GameObject.Find("Player").transform;
 		target = transform.Find("Target").transform;
 
-		lastDistance = Vector3.Distance(player.position, transform.position);
+		lastDistance = Vector2.Distance(player.position, transform.position);
 	}
 	
 	void Update () {
-		Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+		Vector3 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
 		float playerMagnitude = playerVelocity.magnitude;
-		float distance = Vector3.Distance(player.position, transform.position);
+		float distance = Vector2.Distance(player.position, transform.position);
 
 		float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.eulerAngles = new Vector3(0, 0, angle);
@@ -37,13 +37,13 @@ public class Enemy : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		Vector3 velocity = GetComponent<Rigidbody>().velocity;
+		Vector3 velocity = GetComponent<Rigidbody2D>().velocity;
 		float magnitude = velocity.magnitude;
 
 		// Apply Dynamic Drag.
 		if (movingAway)
-			GetComponent<Rigidbody>().AddForce(velocity.normalized * -magnitude);
+			GetComponent<Rigidbody2D>().AddForce(velocity.normalized * -magnitude);
 
-		GetComponent<Rigidbody>().AddForce(transform.right * acceleration);
+		GetComponent<Rigidbody2D>().AddForce(transform.right * acceleration);
 	}
 }
