@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-	private float acceleration = 150.0f;
+	public float acceleration;
 
 	private float lastDistance;
 	private bool movingAway = false;
