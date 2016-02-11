@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Player : MonoBehaviour {
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour {
 			Time.timeScale = 0.0f;
 		}
 		if(Input.GetMouseButton(1)) {
-			Application.LoadLevel("Test");
+			SceneManager.LoadScene("Test");
 		}
 	}
 

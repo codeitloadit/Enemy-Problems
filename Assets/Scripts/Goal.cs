@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Goal : MonoBehaviour {
 
-	private Transform player;
 	private Transform score;
 	private Transform count;
 
@@ -12,7 +11,6 @@ public class Goal : MonoBehaviour {
 	private float distance;
 
 	void Awake() {
-		player = GameObject.Find("Player").transform;
 		score = GameObject.Find("Score").transform;
 		count = GameObject.Find("Count").transform;
 		audio = GetComponent<AudioSource>();
