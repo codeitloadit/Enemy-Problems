@@ -7,15 +7,18 @@ public class Goal : MonoBehaviour {
 	private Transform score;
 	private Transform count;
 
+	AudioSource audio;
+
 	private float distance;
 
-	void Awake () {
+	void Awake() {
 		player = GameObject.Find("Player").transform;
 		score = GameObject.Find("Score").transform;
 		count = GameObject.Find("Count").transform;
+		audio = GetComponent<AudioSource>();
 	}
-	
-	void Update () {
+
+	void Update() {
 		Transform enemyA = GameObject.Find("EnemyA").transform;
 		Transform enemyB = GameObject.Find("EnemyB").transform;
 
@@ -36,10 +39,11 @@ public class Goal : MonoBehaviour {
 		transform.position = new Vector3(x, y, 0);
 	}
 
-	void OnTriggerEnter2D (Collider2D other) {
-		if (other.name == "Player") {
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.name == "Player") {
+			audio.Play();
 			TextMesh scoreTextMesh = score.GetComponent<TextMesh>();
-			scoreTextMesh.text = (int.Parse(scoreTextMesh.text) + 1000 - (int)distance*4).ToString().PadLeft(8, '0');
+			scoreTextMesh.text = (int.Parse(scoreTextMesh.text) + 1000 - (int)distance * 4).ToString().PadLeft(8, '0');
 			TextMesh countTextMesh = count.GetComponent<TextMesh>();
 			countTextMesh.text = (int.Parse(countTextMesh.text) + 1).ToString();
 		}

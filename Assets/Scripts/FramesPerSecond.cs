@@ -19,8 +19,8 @@ public class FramesPerSecond : MonoBehaviour {
 	private int lowCount = 0;
 	private int highCount = 0;
 
-	void Start () {
-		if (!GetComponent<GUIText>()) {
+	void Start() {
+		if(!GetComponent<GUIText>()) {
 			Debug.Log("FramesPerSecond needs a GUIText component!");
 			enabled = false;
 			return;
@@ -28,32 +28,32 @@ public class FramesPerSecond : MonoBehaviour {
 		timeleft = updateInterval;
 	}
 
-	void Update () {
+	void Update() {
 		timeleft -= Time.deltaTime;
-		accum += Time.timeScale/Time.deltaTime;
+		accum += Time.timeScale / Time.deltaTime;
 		++frames;
 
-		if (timeleft <= 0.0) {
-			var fps = accum/frames;
-			if (totalEllapsed > 0.5) {
-				if (fps < low) {
+		if(timeleft <= 0.0) {
+			var fps = accum / frames;
+			if(totalEllapsed > 0.5) {
+				if(fps < low) {
 					low = fps;
-				} else if (fps > high) {
-					high = fps;
-				}
+				} else if(fps > high) {
+						high = fps;
+					}
 
-				if (low == lastLow) {
+				if(low == lastLow) {
 					lowCount += 1;
 				}
-				if (high == lastHigh) {
+				if(high == lastHigh) {
 					highCount += 1;
 				}
 
-				if (lowCount >= 50) {
+				if(lowCount >= 50) {
 					lowCount = 0;
 					low = 60;
 				}
-				if (highCount >= 50) {
+				if(highCount >= 50) {
 					highCount = 0;
 					high = 60;
 				}

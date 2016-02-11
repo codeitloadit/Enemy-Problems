@@ -11,14 +11,14 @@ public class Enemy : MonoBehaviour {
 	private Transform player;
 	private Transform target;
 
-	void Awake () {
+	void Awake() {
 		player = GameObject.Find("Player").transform;
 		target = transform.Find("Target").transform;
 
 		lastDistance = Vector2.Distance(player.position, transform.position);
 	}
-	
-	void Update () {
+
+	void Update() {
 		Vector3 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
 		float playerMagnitude = playerVelocity.magnitude;
 		float distance = Vector2.Distance(player.position, transform.position);
@@ -26,23 +26,24 @@ public class Enemy : MonoBehaviour {
 		float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.eulerAngles = new Vector3(0, 0, angle);
 
-		if (lastDistance < distance)
+		if(lastDistance < distance) {
 			movingAway = true;
-		else
+		} else {
 			movingAway = false;
+		}
 		lastDistance = distance;
 
-		target.position = player.position + (playerVelocity.normalized * (playerMagnitude)/2) * (distance/50);
+		target.position = player.position + (playerVelocity.normalized * (playerMagnitude) / 2) * (distance / 50);
 	}
 
-	void FixedUpdate () {
-
+	void FixedUpdate() {
 		Vector3 velocity = GetComponent<Rigidbody2D>().velocity;
 		float magnitude = velocity.magnitude;
 
 		// Apply Dynamic Drag.
-		if (movingAway)
+		if(movingAway) {
 			GetComponent<Rigidbody2D>().AddForce(velocity.normalized * -magnitude);
+		}
 
 		GetComponent<Rigidbody2D>().AddForce(transform.right * acceleration);
 	}
