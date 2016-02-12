@@ -17,7 +17,7 @@ public class AdsRevMob : MonoBehaviour {
 
 	void Start() {
 		#if UNITY_ANDROID || UNITY_IPHONE
-		RevMobBanner banner = revmob.CreateBanner(RevMob.Position.BOTTOM, 0, 4, 1080, 216);
+		RevMobBanner banner = revmob.CreateBanner(RevMob.Position.BOTTOM, 0, 0, Screen.width, (int)Screen.width / 7);
 		banner.Show();
 		#endif
 	}
